@@ -1,5 +1,5 @@
 # test
-data/
+AERO_box/data/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
