@@ -13,6 +13,7 @@ def calculate_aqi(Cp, pollutant):
         'so2': [(0, 35, 0, 50), (36, 75, 51, 100), (76, 185, 101, 150), (186, 304, 151, 200), (305, 604, 201, 300), (605, 804, 301, 400), (805, 1004, 401, 500)],
         'no2': [(0, 53, 0, 50), (54, 100, 51, 100), (101, 360, 101, 150), (361, 649, 151, 200), (650, 1249, 201, 300), (1250, 1649, 301, 400), (1650, 2049, 401, 500)],
         'co': [(0, 4.4, 0, 50), (4.5, 9.4, 51, 100), (9.5, 12.4, 101, 150), (12.5, 15.4, 151, 200), (15.5, 30.4, 201, 300), (30.5, 40.4, 301, 400), (40.5, 50.4, 401, 500)],
+        # something still wrong with the O3 breakpoints
         'o3': [(0, 0.054, 0, 50), (0.055, 0.070, 51, 100), (0.071, 0.085, 101, 150), (0.086, 0.105, 151, 200), (0.106, 0.200, 201, 300)]
     }
 
@@ -26,6 +27,7 @@ def calculate_aqi(Cp, pollutant):
     aqi = ((Ih - Il) / (BPh - BPl)) * (Cp - BPl) + Il
     return round(aqi)
 
+
 # For example, to calculate the AQI for SO2 with a concentration of 75
-pm25_aqi = calculate_aqi(47.0, 'pm25')
-print(f"The AQI for pm2.5 is {pm25_aqi}")
+pm10_aqi = calculate_aqi(12.0, 'no2')
+print(f"The AQI for pm2.5 is {pm10_aqi}")
