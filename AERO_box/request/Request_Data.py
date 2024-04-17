@@ -11,26 +11,31 @@ def get_data_with_cookie(cookie, start_date, end_date):
         "e_t": end_date.strftime("%Y-%m-%dT%H:%M:%S.000Z")
     }
     headers = {
-        "Cookie": "sessionid="+cookie  # Include the session cookie in the request headers
+        "Cookie": "sessionid="+cookie+";csrftoken=iUkcm1zdhqZy5DnV2zfWCs7NMQd5GqU56MrrFsvWagTgn0ggcKhaBxZxUZy1DioK"  # Include the session cookie in the request headers
     }
     response = requests.get(base_url, params=query_params, headers=headers)
     if response.status_code == 200:
+        # print("response:",response.content)
         return response.content
     else:
         print("Error:", response.status_code)
         return None
 
 def Request_data(cookie="hutq38pdot7jzmnlq4wgx7xlfx5sxeo6"):
-    start_date = datetime.datetime(2022, 9, 1)
-    end_date = datetime.datetime(2022, 9, 30, 23, 59, 59, 999000)  # Last millisecond of September 2022
+    start_date = datetime.datetime(2023, 9, 1)
+    end_date = datetime.datetime(2023, 9, 30, 23, 59, 59, 999000)  # Last millisecond of September 2022
     end_month = datetime.datetime(2024, 4, 1)
     directory = "./data"  # Directory to store the files
 
     if not os.path.exists(directory):
         os.makedirs(directory)
-
+    i = 0
     while end_date <= end_month:
+        print("start_date:",start_date)
+        print("end_date:",end_date)
         data = get_data_with_cookie(cookie, start_date, end_date)
+        print(i)
+        i+=1
         if data:
             # Save the response content to a file
             filename = end_date.strftime("%Y-%m-%d") + ".csv"
@@ -42,10 +47,4 @@ def Request_data(cookie="hutq38pdot7jzmnlq4wgx7xlfx5sxeo6"):
             start_date = end_date + datetime.timedelta(seconds=1)
             end_date += datetime.timedelta(days=30)  # Adding 30 days for the next month (may need adjustment for February)
         else:
-            # Break the loop if there's an error fetching data
-            break
-
-# Provide your session cookie here
-# session_cookie = "hutq38pdot7jzmnlq4wgx7xlfx5sxeo6"
-
-# Request_data(session_cookie)
+            print("it failed")
