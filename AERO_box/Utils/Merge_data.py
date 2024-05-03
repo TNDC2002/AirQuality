@@ -16,8 +16,11 @@ def get_data(folder_path = '../Data/'):
     # Merge DataFrames into a single DataFrame
     merged_df = pd.concat(dfs, ignore_index=True)
     
+    
+    df["ds"] = df["Time(UTC+0)"].apply(lambda x: datetime.datetime.strptime(x, '%Y/%m/%d %H:%M:%S').timestamp())
+    
     # Drop columns
-    columns_to_drop = ["Temp(°C)", "RH(%)", "CO2(ppm)"]
+    columns_to_drop = ["Temp(°C)", "RH(%)", "CO2(ppm)", "Time(UTC+0)"]
     merged_df.drop(columns=columns_to_drop, inplace=True)
     
     # Generate unique_id column
@@ -25,8 +28,6 @@ def get_data(folder_path = '../Data/'):
     merged_df["unique_id"] = unique_id
     
     # Rename column
-    new_column_names = {"Time(UTC+0)": "ds"}
-    merged_df.rename(columns=new_column_names, inplace=True)
     new_column_names = {"PM2.5(μm/m^3)": "y"}
     merged_df.rename(columns=new_column_names, inplace=True)
     
