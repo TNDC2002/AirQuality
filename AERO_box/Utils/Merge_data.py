@@ -15,6 +15,19 @@ def get_data(folder_path = '../Data/'):
 
     # Merge DataFrames into a single DataFrame
     merged_df = pd.concat(dfs, ignore_index=True)
+    
+    # Drop columns
+    columns_to_drop = ["Temp(°C)", "RH(%)", "CO2(ppm)"]
+    merged_df.drop(columns=columns_to_drop, inplace=True)
+    
+    # Generate unique_id column
+    unique_id = "dd5fc1f864bcd715715c54af59bbf21c"
+    merged_df["unique_id"] = unique_id
+    
+    # Rename column
+    new_column_names = {"Time(UTC+0)": "ds"}
+    merged_df.rename(columns=new_column_names, inplace=True)
+    
     # merged_df = merged_df.sort_values(by='timestamp_o')
     # print(dfs)
     return merged_df
