@@ -29,5 +29,5 @@ def calculate_aqi(Cp, pollutant):
 
 
 # For example, to calculate the AQI for SO2 with a concentration of 75
-pm10_aqi = calculate_aqi(12.0, 'no2')
-print(f"The AQI for pm2.5 is {pm10_aqi}")
+# pm10_aqi = calculate_aqi(12.0, 'no2')
+# print(f"The AQI for pm2.5 is {pm10_aqi}")
