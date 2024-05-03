@@ -17,7 +17,7 @@ def get_data(folder_path = '../Data/'):
     merged_df = pd.concat(dfs, ignore_index=True)
     
     
-    df["ds"] = df["Time(UTC+0)"].apply(lambda x: datetime.datetime.strptime(x, '%Y/%m/%d %H:%M:%S').timestamp())
+    merged_df["ds"] = merged_df["Time(UTC+0)"].apply(lambda x: datetime.datetime.strptime(x, '%Y/%m/%d %H:%M:%S').timestamp())
     
     # Drop columns
     columns_to_drop = ["Temp(°C)", "RH(%)", "CO2(ppm)", "Time(UTC+0)"]
