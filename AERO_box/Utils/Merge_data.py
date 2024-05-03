@@ -27,6 +27,8 @@ def get_data(folder_path = '../Data/'):
     # Rename column
     new_column_names = {"Time(UTC+0)": "ds"}
     merged_df.rename(columns=new_column_names, inplace=True)
+    new_column_names = {"PM2.5(μm/m^3)": "y"}
+    merged_df.rename(columns=new_column_names, inplace=True)
     
     # merged_df = merged_df.sort_values(by='timestamp_o')
     # print(dfs)
