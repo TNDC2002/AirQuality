@@ -63,9 +63,9 @@ def get_data_with_cookie(session_cookie, csrf_token, start_date, end_date):
 def Request_data(username, password, directory="./data"):
     session, session_cookie = authenticate(username, password)
     if session and session_cookie:
-        start_date = datetime.datetime(2023, 9, 1)
-        end_date = datetime.datetime(2023, 9, 30, 23, 59, 59, 999000)  # Last millisecond of September 2023
-        end_month = datetime.datetime(2024, 4, 1)
+        start_date = datetime.datetime(2023, 7, 1)
+        end_date = datetime.datetime(2023, 7, 30, 23, 59, 59, 999000)  # Last millisecond of September 2023
+        end_month = datetime.datetime(2024, 5, 1)
 
         if not os.path.exists(directory):
             os.makedirs(directory)
