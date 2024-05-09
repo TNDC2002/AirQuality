@@ -21,7 +21,7 @@ def get_data(folder_path = '../Data/'):
     
     merged_df["ds"] = merged_df["Time(UTC+0)"].apply(lambda x: int(datetime.datetime.strptime(x, '%Y/%m/%d %H:%M:%S').timestamp()))
     # Drop columns
-    columns_to_drop = ["Temp(°C)", "RH(%)", "CO2(ppm)", "Time(UTC+0)"]
+    columns_to_drop = ["Temp(°C)", "RH(%)", "CO2(ppm)"]
     merged_df.drop(columns=columns_to_drop, inplace=True)
     
     # Generate unique_id column

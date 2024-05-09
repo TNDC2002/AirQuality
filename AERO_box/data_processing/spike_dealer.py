@@ -1,3 +1,4 @@
+import datetime
 import pandas as pd
 import matplotlib.pyplot as plt
 import logging
@@ -77,6 +78,39 @@ def remove_spike(df, signal):
     
     return df
 
+
+def spike_remover(path, save_path,signal):
+    # average = 6 -> 1 minute
+    # average = 360 -> 1 hour
+    if save_path is None:
+        save_path = path
+    df = pd.read_csv(path)
+    # print(df.head(1)["Time(UTC+0)"].item())
+
+    # Convert Time(UTC+0) to timestamp
+    df["sorter"] = df["Time(UTC+0)"].apply(lambda x: datetime.datetime.strptime(x, '%Y/%m/%d %H:%M:%S').timestamp())
+
+    # Sort DataFrame based on the timestamp
+    df = df.sort_values(by="sorter")
+    # Calculate the ceiling-rounded average of every sixty rows (representing 1 hour) and store it in a new DataFrame
+    
+    new_df = remove_spike(df, signal)
+    
+    
+    # Rename column
+    new_column_names = {signal: "old_"+signal}
+    new_df.rename(columns=new_column_names, inplace=True)
+    
+    new_column_names = {"y_interpolated": signal}
+    new_df.rename(columns=new_column_names, inplace=True)
+    
+    # Drop columns
+    columns_to_drop = ["old_"+signal, "y_clipped", "y_ewma_fb", "y_remove_outliers", "rand", "sorter"]
+    new_df.drop(columns=columns_to_drop, inplace=True)
+        
+    # Create a new DataFrame with the averaged data
+    new_df.to_csv(save_path, index=False)
+    return new_df
 
 
 # # test

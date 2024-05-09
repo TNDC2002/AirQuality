@@ -4,8 +4,10 @@ from data_processing.compresser import Compresser
 from Utils.Merge_data import get_data
 from data_processing.spike_dealer import remove_spike
 import matplotlib.pyplot as plt
-# Request_data(username="16077",password="@De0-Kinh@")
 
+
+
+# Request_data(username="16077",password="@De0-Kinh@")
 
 # compress data:
 # folder_path = sorted(glob.glob("./data" +'/*.csv'))
