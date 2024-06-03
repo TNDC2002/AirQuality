@@ -45,7 +45,7 @@ def authenticate(username, password):
 def get_data_with_cookie(session_cookie, csrf_token, start_date, end_date):
     base_url = "https://legacy.ideasky.app/device/downloadCsvFile/"
     query_params = {
-        "w_id": "dd5fc1f864bcd715715c54af59bbf21c",
+        "w_id": "8828c291498aa9c79eb02d3baaf4d0c8",
         "mean": "r",
         "s_t": start_date.strftime("%Y-%m-%dT%H:%M:%S.000Z"),
         "e_t": end_date.strftime("%Y-%m-%dT%H:%M:%S.000Z")
@@ -63,8 +63,8 @@ def get_data_with_cookie(session_cookie, csrf_token, start_date, end_date):
 def Request_data(username, password, directory="./data"):
     session, session_cookie = authenticate(username, password)
     if session and session_cookie:
-        start_date = datetime.datetime(2023, 7, 1)
-        end_date = datetime.datetime(2023, 7, 30, 23, 59, 59, 999000)  # Last millisecond of September 2023
+        start_date = datetime.datetime(2023, 8, 1)
+        end_date = datetime.datetime(2023, 8, 30, 23, 59, 59, 999000)  # Last millisecond of September 2023
         end_month = datetime.datetime(2024, 5, 1)
 
         if not os.path.exists(directory):
