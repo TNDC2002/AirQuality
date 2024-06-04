@@ -1,0 +1,3 @@
+pytorch-tcn==1.0.0
+tqdm
+scikit-learn

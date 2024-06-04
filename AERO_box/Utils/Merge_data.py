@@ -19,29 +19,29 @@ def get_data(folder_path = '../Data/'):
     merged_df = pd.concat(dfs, ignore_index=True)
     
     
-    merged_df["ds"] = merged_df["Time(UTC+0)"].apply(lambda x: int(datetime.datetime.strptime(x, '%Y/%m/%d %H:%M:%S').timestamp()))
+    # merged_df["ds"] = merged_df["Time(UTC+0)"].apply(lambda x: int(datetime.datetime.strptime(x, '%Y/%m/%d %H:%M:%S').timestamp()))
+    
+    
     # Drop columns
-    columns_to_drop = ["Temp(°C)", "RH(%)", "CO2(ppm)"]
-    merged_df.drop(columns=columns_to_drop, inplace=True)
+    # columns_to_drop = ["Temp(°C)", "RH(%)", "CO2(ppm)"]
+    # merged_df.drop(columns=columns_to_drop, inplace=True)
     
     # Generate unique_id column
-    unique_id = "dd5fc1f864bcd715715c54af59bbf21c"
-    merged_df["unique_id"] = unique_id
+    # unique_id = "dd5fc1f864bcd715715c54af59bbf21c"
+    # merged_df["unique_id"] = unique_id
     
     # Rename column
-    new_column_names = {"PM2.5(μm/m^3)": "y"}
-    merged_df.rename(columns=new_column_names, inplace=True)
+    # new_column_names = {"PM2.5(μm/m^3)": "y"}
+    # merged_df.rename(columns=new_column_names, inplace=True)
     
-    merged_df = remove_spike(merged_df, 'y')
+    merged_df = remove_spike(merged_df, 'PM2.5(μm/m^3)')
     # Rename column
-    signal = "y"
+    signal = "PM2.5(μm/m^3)"
     new_column_names = {signal: "old_"+signal}
     merged_df.rename(columns=new_column_names, inplace=True)
     
     new_column_names = {"y_interpolated": signal}
     merged_df.rename(columns=new_column_names, inplace=True)
-    
-    print(merged_df.head())
     
     # plt.figure(figsize=(10, 6))
     # plt.plot(merged_df['ds'], merged_df['old_y'], label='old_y')
