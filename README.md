@@ -1,5 +1,6 @@
 # AirQuality
-
+## Data processing modules:
+Look for an example of usage in AERO_box/main.py  
 ## Timeseries module manual:  
 There are 2 versions of the Timeseries prediction module, 1 is LSTM, 1 is Hybrid. This tutorial is write for the Hybrid!   
 Step 1: your environment should installed pytorch and cudatoolkit that suitable for your pytorch in case you want to train by GPU    
